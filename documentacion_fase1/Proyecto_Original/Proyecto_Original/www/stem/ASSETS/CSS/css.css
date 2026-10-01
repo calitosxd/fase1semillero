@@ -1,0 +1,126 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.Body-css {
+  background: white;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  overflow: hidden;
+  border: 1px solid black;
+}
+
+.Header-css {
+  background: #045c2c;
+  float: left;
+  width: 100%;
+  padding: 0.5em;
+  border-bottom: 1px solid black;
+}
+
+.Imagenes_Base {
+  width: 100%;
+  max-width: 200px;
+  margin: auto;
+}
+
+/*Inicio botenes WEB Activados -------------------------------- */
+.btn, .btndes {
+  color: #0099CC;
+  background: #25b4f8;
+  border: 2px solid #EF7323;
+  border-radius: 6px;
+  text-transform: uppercase;
+  padding: 14px 30px;
+  text-align: center;
+  display: inline-block;
+  font-size: 10px;
+  margin: 4px 2px;
+  cursor: pointer;
+  text-decoration: none;
+  width: auto;
+  max-width: 160px;
+  background-color: white;
+  color: black;
+  border: 2px solid red;
+}
+
+.btn:hover, .btndes:hover {
+  background-color: #045c2c;
+  color: white;
+}
+
+/*Contenedor Parte ASSIDE y SECTION--------------------------------*/
+.Aside-css {
+  background: white;
+  width: 100%;
+  max-width: 15%;
+  height: 100%;
+  padding: 0;
+  float: left;
+}
+
+.Section-css {
+  background: white;
+  overflow-x: auto;
+  padding: 0;
+  margin: 0;
+  float: left;
+  width: 100%;
+  max-width: calc(85% - 20px); /* Ajusta según el ancho de Aside-css y margen */
+}
+
+.contenedor {
+  width: 100%;
+  max-width: 100%;
+}
+
+.form input {
+  width: auto;
+  max-width: 100%;
+  border-radius: 4px;
+  float: center;
+  margin: auto;
+}
+
+table {
+  width: 100%;
+  max-width: 90%;
+  border: 1px solid #000;
+  background: white;
+  border-radius: 0.5em;
+  border-collapse: collapse;
+  font-size: auto;
+  margin: auto;
+  text-align: center;
+}
+
+th {
+  background: #dedede;
+  white-space: nowrap; /* Asegura que el texto no se divida en varias líneas */
+}
+
+th, td {
+  text-align: center;
+  vertical-align: center;
+  border: 1px solid #000;
+  border-collapse: collapse;
+  padding: 0.3em;
+  caption-side: bottom;
+  white-space: nowrap; /* Asegura que el texto no se divida en varias líneas */
+}
+
+caption {
+  padding: 0.3em;
+}
+
+/*Parte de FOOTER------------------------------------------*/
+.Footer-css {
+  background: #045c2c;
+  float: left;
+  width: 100%;
+  padding: 0.5em;
+  border-top: 1px solid black;
+}
