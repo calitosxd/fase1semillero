@@ -17,7 +17,9 @@ function filtrado($datos){
 
 /*Función que realiza la conexión con la Base de Datos, en este caso, para acceder a la tabla sensores.*/
 function Funcion_Conectar_Base_Datos_ESP32(){
-    $conexion = mysqli_connect("127.0.0.1", getenv('DB_USER') ?: '', getenv('DB_PASSWORD') ?: '', "Base_Datos_Proyecto");
+    $db_user = getenv('DB_USER') ?: 'root';
+    $db_pass = getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : '';
+    $conexion = mysqli_connect("127.0.0.1", $db_user, $db_pass, "Base_Datos_Proyecto");
 
     if(!$conexion){
         die("Eror en la conexion: " . mysqli_connect_error());
@@ -33,8 +35,12 @@ function Funcion_Conectar_Base_Datos_ESP32(){
 function Funcion_Conectar_Base_Datos()
 {
     /*Conexión con Base de Datos local*/
-        define('BD_USER', getenv('DB_USER') ?: '');
-        define('BD_CLAVE', getenv('DB_PASSWORD') ?: '');
+        if (!defined('BD_USER')) {
+            define('BD_USER', getenv('DB_USER') ?: 'root');
+        }
+        if (!defined('BD_CLAVE')) {
+            define('BD_CLAVE', getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : '');
+        }
     /*Conexión con Base de Datos WEB*/
 
     /*Conexion a la BD*/

@@ -22,23 +22,25 @@ $pass2 = Funcion_Contrasena_encriptar($pass);
 $conexion = Funcion_Conectar_Base_Datos();
 
 try {
-    $sql = "SELECT * FROM usuario WHERE (id_pk_usuario =:user) AND (pass_usuario =:pass2)";
+    $user_clean = trim($user);
+    $sql = "SELECT * FROM usuario WHERE (id_pk_usuario = :user OR LOWER(nombre_usuario) = LOWER(:user) OR LOWER(correo_usuario) = LOWER(:user)) AND (pass_usuario = :pass2 OR pass_usuario = :pass_plain)";
     $query = $conexion->prepare($sql);        
-    $query->bindparam(':user', $user, PDO::PARAM_STR);
+    $query->bindparam(':user', $user_clean, PDO::PARAM_STR);
     $query->bindparam(':pass2', $pass2, PDO::PARAM_STR);
+    $query->bindparam(':pass_plain', $pass, PDO::PARAM_STR);
     $query->execute();
+    $datos = $query->fetch(PDO::FETCH_ASSOC);
 
-    if ($query->rowCount() <= 0) {
+    if (!$datos) {
         echo 'Datos invalidos, restringido el ingreso!';
     } else {    
-        $datos = $query->fetch(PDO::FETCH_ASSOC);
-		// Si el logueo del usuario es exitoso, entonces tomamos el dato rol y permiso y lo enviamos por el 
-		// metodo post a las paginas donde se requiere este dato.
+        // Si el logueo del usuario es exitoso, entonces tomamos el dato rol y permiso y lo enviamos por el 
+        // metodo post a las paginas donde se requiere este dato.
         if ($datos['estado_usuario'] == 1) {
             $rol = $datos['id_pk_rol_fk'];
             $permiso = $datos['permiso_usuario_1'];
            echo "
-            <form id='redirectForm' method='POST' action='http://192.168.0.100/I_Bienvenida.php'>
+            <form id='redirectForm' method='POST' action='../I_Bienvenida.php'>
                 <input type='hidden' name='rol' value='$rol'>
                 <input type='hidden' name='permiso' value='$permiso'>
             </form>
@@ -47,7 +49,7 @@ try {
             </script>
             ";
         } elseif ($datos['estado_usuario'] == 0) {
-            header("Location: http://192.168.0.100/I_Usuarios_Inactivo.php");
+            header("Location: ../I_Usuarios_Inactivo.php");
             exit;
         }
     }
